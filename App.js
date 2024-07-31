@@ -15,13 +15,18 @@ mongoose.connect(CONNECTION_STRING);
 
 const app = express()
 
-app.use(
-    cors({
-      credentials: true,
-      origin: process.env.NETLIFY_URL || "http://localhost:3000",
-    })
-   );
-   
+const allowedOrigins = ["http://localhost:3000", "https://a6--kanbas-react-web-app-suf-2024-a6.netlify.app/"];
+
+app.use(cors({
+  credentials: true,
+  origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+          callback(null, true);
+      } else {
+          callback(new Error('Not allowed by CORS'));
+      }
+  }
+}));
 
 const sessionOptions = {
     secret: "any string",

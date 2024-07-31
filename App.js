@@ -15,7 +15,7 @@ mongoose.connect(CONNECTION_STRING);
 
 const app = express()
 
-const allowedOrigins = ["http://localhost:3000", "https://a6--kanbas-react-web-app-suf-2024-a6.netlify.app/"];
+const allowedOrigins = ["http://localhost:3000", "https://a6--kanbas-react-web-app-suf-2024-a6.netlify.app"];
 
 app.use(cors({
   credentials: true,
@@ -29,7 +29,7 @@ app.use(cors({
 }));
 
 const sessionOptions = {
-    secret: "any string",
+    secret: process.env.SESSION_SECRET ,
     resave: false,
     saveUninitialized: false,
   };
